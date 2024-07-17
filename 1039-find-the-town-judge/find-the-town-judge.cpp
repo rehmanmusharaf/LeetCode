@@ -1,18 +1,18 @@
 class Solution {
 public:
     int findJudge(int n, vector<vector<int>>& trust) {
-        vector<int>data(n+1,0);
-        for(auto x:trust)
-        {
-            data[x[0]]--;
-            data[x[1]]++;
+    vector<int> ansarr(n+1,0);
+    // int n=size(trust);
+    for(int i=0;i<size(trust);i++)
+    {
+    ansarr[trust[i][0]]--;
+    ansarr[trust[i][1]]++;
+    } 
+       for (int i = 1; i <= n; i++) {
+            if (ansarr[i] == n - 1) {
+                return i;
+            }
         }
-        for(int i=1;i<=n;i++)
-        {
-            int num=data[i];
-            if(num==n-1)
-            return i;
-        }
-        return -1;
+    return -1;
     }
 };
