@@ -1,49 +1,42 @@
-// https://leetcode.com/problems/number-of-islands/
-
 class Solution {
 public:
-    
-    
-    bool isValid(int i, int j, int n , int m, vector<vector<char>>& grid){
-        if(i>=0 && i<n && j>=0 && j<m && grid[i][j] == '1')
-            return true;
-        
-        return false;
+    bool isvalid(int i, int j, int n, int m, vector<vector<char>>& grid) {
+        // Corrected boundary check
+        return i >= 0 && i < n && j >= 0 && j < m && grid[i][j] == '1';
     }
-    
-    void numIslandsRec(int i, int j, int n , int m, vector<vector<char>>& grid){
-        
+
+    void numisIsland(int i, int j, int n, int m, vector<vector<char>>& grid) {
+        // Mark the current cell as visited
         grid[i][j] = '0';
-        
-        if(isValid(i+1, j, n, m , grid))
-            numIslandsRec(i+1, j, n, m, grid);
-        
-        if(isValid(i-1, j, n, m , grid))
-            numIslandsRec(i-1, j, n, m, grid);
-        
-        if(isValid(i, j+1, n, m , grid))
-            numIslandsRec(i, j+1, n, m, grid);
-        
-        if(isValid(i, j-1, n, m , grid))
-            numIslandsRec(i, j-1, n, m, grid);
-        
+
+        // Explore all four directions
+        if (isvalid(i + 1, j, n, m, grid)) {
+            numisIsland(i + 1, j, n, m, grid);
+        }
+        if (isvalid(i, j + 1, n, m, grid)) {
+            numisIsland(i, j + 1, n, m, grid);
+        }
+        if (isvalid(i - 1, j, n, m, grid)) {
+            numisIsland(i - 1, j, n, m, grid);
+        }
+        if (isvalid(i, j - 1, n, m, grid)) {
+            numisIsland(i, j - 1, n, m, grid);
+        }
     }
-    
+
     int numIslands(vector<vector<char>>& grid) {
-        
         int n = grid.size();
         int m = grid[0].size();
         int ans = 0;
-        
-        for(int i=0; i<n; i++){
-            for(int j=0; j<m; j++){
-                if(grid[i][j] == '1'){
+
+        for (int i = 0; i < n; i++) {
+            for (int j = 0; j < m; j++) {
+                if (grid[i][j] == '1') {
                     ans++;
-                    numIslandsRec(i, j, n, m, grid);
+                    numisIsland(i, j, n, m, grid);              
                 }
             }
-        }
-        
+        }    
         return ans;
     }
 };
